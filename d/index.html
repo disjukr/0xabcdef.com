@@ -35,13 +35,18 @@
     <script type="text/javascript">
     // time zone: UTC+9
     var d = new Date('Thu Jul 31 2014');
-    var t = new Date;
+    var end = new Date('Wed Nov 26 2014');
+    // var t = new Date;
     var one_day = 1000 * 60 * 60 * 24;
     var d_day = {
         'd+': ((t - d) / one_day) | 0,
         'y+': (t.getFullYear() - d.getFullYear()) | 0
-    }
-    $('#d-day').text('D+' + d_day['d+']);
+    };
+    var end_day = {
+        'd+': ((end - d) / one_day) | 0,
+        'y+': (end.getFullYear() - d.getFullYear()) | 0
+    };
+    $('#d-day').text(end_day['d+']);
     </script>
 </body>
 </html>
