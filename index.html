@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>0xABCDEF.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <style>
@@ -31,6 +32,7 @@
     .title {
       margin-top: 0;
       margin-bottom: 30px;
+      white-space: nowrap;
       font-size: 50px;
       font-weight: 200;
       font-family: 'Source Sans Pro';
@@ -72,11 +74,11 @@
     }
     .bg img {
       position: absolute;
-      width: calc(100vw + 40px);
+      width: calc(100vmax + 40px);
       height: auto;
-      left: -20px;
+      left: calc(50% + 40px);
       top: 50%;
-      transform: scale(1.1) translateY(-50%);
+      transform: scale(1.1) translate(-50%, -50%);
       filter: blur(20px);
       -o-filter: blur(20px);
       -ms-filter: blur(20px);
