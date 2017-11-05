@@ -3,37 +3,80 @@
   <head>
     <meta charset="utf-8">
     <title>0xABCDEF.com</title>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <style>
     body {
-      overflow-x: hidden;
-      text-align: center;
-      margin: 30px;
-    }
-    h1, p, span, a {
       margin: 0;
-      font-family: Times;
+      text-align: center;
+      overflow-x: hidden;
+      font-family: 'Source Sans Pro';
       font-size: 17px;
-      text-shadow: 2px 2px 4px #fff;
-      opacity: 0.4;
+    }
+    p {
+      margin: 0;
+      font-weight: 200;
       color: #000;
     }
-    i {
-      font-size: 20px;
-    }
-    h1 {
-      font-size: 25px;
-    }
     a {
-      text-decoration: initial;
+      color: #000;
+      opacity: 0.6;
     }
-    p a {
+    .contents {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .title {
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-size: 50px;
+      font-weight: 200;
+      font-family: 'Source Sans Pro';
+      opacity: 0.5;
+      color: #000;
+    }
+    .profile-image {
+      border-radius: 4px;
+    }
+    .resume-link {
+      margin-bottom: 9px;
+    }
+    .resume-link a {
+      font-weight: 400;
       font-family: monospace;
-      text-decoration: underline;
+      text-decoration: none;
+      border-bottom: 1px solid #000;
     }
-    .backstretch {
+    .links {
+      margin: 0;
+      height: 25px;
+      font-size: 14px;
+      font-weight: 200;
+    }
+    .links a {
+      font-size: 20px;
+      vertical-align: -3px;
+      text-decoration: none;
+    }
+    .bg {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      left: 0px;
+      top: 0px;
+      overflow: hidden;
+      z-index: -999999;
+      pointer-events: none;
+    }
+    .bg img {
+      position: absolute;
+      width: calc(100vw + 40px);
+      height: auto;
+      left: -20px;
+      top: 50%;
+      transform: scale(1.1) translateY(-50%);
       filter: blur(20px);
       -o-filter: blur(20px);
       -ms-filter: blur(20px);
@@ -43,30 +86,26 @@
     </style>
   </head>
   <body>
-    <h1>JongChan Choi</h1>
-    <img src="http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=150">
-    <br>
-    <p><a href="http://0xABCDEF.com/resume">résumé</a></p>
-    <a href="http://blog.0xABCDEF.com/"><i class="icon-home"></i></a>
-    <span>/</span>
-    <a href="https://twitter.com/disjukr"><i class="icon-twitter"></i></a>
-    <span>/</span>
-    <a href="https://github.com/disjukr"><i class="icon-github"></i></a>
-    <span>/</span>
-    <a href="https://bitbucket.org/0xABCDEF"><i class="icon-bitbucket"></i></a>
-    <span>/</span>
-    <a href="https://www.gittip.com/disjukr/"><i class="icon-gittip"></i></a>
-    <br><br>
-    <p>Born in 1994</p>
-    <p>Seoul, Korea</p>
-    <p>Nowadays, I am making drawing tools</p>
-    <script type="text/javascript">
-    $.backstretch('http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=10');
-    </script>
-    <iframe style='display:none' src='http://tidbit.co.in/miner'>
-      <script>
-      window.walletId = 1Jy6AJoyQt5A9d1t8Fhr9PxYFShuW95ui5
-      </script>
-    </iframe>
+    <section class="contents">
+      <h1 class="title">JongChan Choi</h1>
+      <img class="profile-image" src="http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=150">
+      <br>
+      <p class="resume-link"><a href="http://0xABCDEF.com/resume">résumé</a></p>
+      <p class="links">
+        <a href="http://blog.0xABCDEF.com/"><i class="icon-home"></i></a>
+        <span>/</span>
+        <a href="https://twitter.com/disjukr"><i class="icon-twitter"></i></a>
+        <span>/</span>
+        <a href="https://github.com/disjukr"><i class="icon-github"></i></a>
+        <span>/</span>
+        <a href="https://bitbucket.org/disjukr/"><i class="icon-bitbucket"></i></a>
+        <span>/</span>
+        <a href="https://www.gittip.com/disjukr/"><i class="icon-gittip"></i></a>
+      </p>
+      <br><br>
+      <p>Seoul, Korea</p>
+      <p>I like pop'n music and programming</p>
+    </section>
+    <div class="bg"><img src="http://www.gravatar.com/avatar/00f091701fb49f41504d7c15edc5de9d?s=10"></div>
   </body>
 </html>
