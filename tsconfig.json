@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["dom", "es2018"],
+        "jsx": "react",
+        "downlevelIteration": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "types": ["node"]
+    },
+    "exclude": ["node_modules"]
+}
