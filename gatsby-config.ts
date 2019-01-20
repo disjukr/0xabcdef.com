@@ -4,6 +4,12 @@ export = {
         'gatsby-plugin-sass',
         'gatsby-plugin-typescript',
         {
+            resolve: 'gatsby-plugin-layout',
+            options: {
+                component: require.resolve('./src/components/Layout/index.tsx'),
+            },
+        },
+        {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: '0xABCDEF',
