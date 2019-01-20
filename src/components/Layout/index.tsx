@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { joinProvider } from 'join-react-context';
 
 import { arr0 } from '../../util';
@@ -16,17 +17,29 @@ export default ({ children }: LayoutProps) => {
         return () => window.removeEventListener('resize', onresize);
     }, arr0);
     const context = [layoutState];
-    return <Provider value={context}>{children}</Provider>;
+    return (
+        <Provider value={context}>
+            <Helmet>
+                <title>JongChan Choi</title>
+            </Helmet>
+            {children}
+        </Provider>
+    );
 };
 
-const getLayoutState = () => ({
-    width: window.innerWidth,
-    height: window.innerHeight,
-});
-
-export const layoutContext = createContext({
+const initialLayoutState = {
     width: 640,
     height: 1280,
-});
+};
+
+const getLayoutState = () =>
+    typeof window === 'undefined'
+        ? initialLayoutState
+        : {
+              width: window.innerWidth,
+              height: window.innerHeight,
+          };
+
+export const layoutContext = createContext(initialLayoutState);
 
 const Provider = joinProvider([layoutContext]);

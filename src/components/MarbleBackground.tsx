@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { ContextValue } from 'join-react-context';
-import * as PIXI from 'pixi.js';
 
 import { arr0, useSubscribe, useAnimationFrameLoop } from '../util';
 import { layoutContext } from './Layout';
@@ -15,6 +14,89 @@ export default ({ className }: Props) => {
     const height = layoutState.height / 2;
     useAnimationFrameLoop(emitter);
     useEffect(() => {
+        // babel에서 typeof import 지원이 안되는 듯 하다...
+        // 개발활때만 주석 풀고 작업해야함 ㅠㅠㅠ
+        // const PIXI: typeof import('pixi.js') = require('pixi.js');
+        const PIXI = require('pixi.js');
+        class Circle extends PIXI.Graphics {
+            constructor(
+                public x: number,
+                public y: number,
+                public dx: number,
+                public dy: number,
+                public size: number,
+                public color: number
+            ) {
+                super();
+                this.blendMode = PIXI.BLEND_MODES.ADD;
+                if (size > 0) {
+                    this.beginFill(color);
+                    this.drawCircle(0, 0, size);
+                    this.endFill();
+                }
+            }
+            move(container: PIXI.Container, stageWidth: number, stageHeight: number) {
+                this.x += this.dx;
+                this.y += this.dy;
+                if (
+                    this.x < -this.size ||
+                    this.x > stageWidth + this.size ||
+                    this.y < -this.size ||
+                    this.y > stageHeight + this.size
+                ) {
+                    container.removeChild(this);
+                }
+            }
+            static gen(stageWidth: number, stageHeight: number, pow: number) {
+                const size = pow * (Math.max(stageWidth, stageHeight) / 5);
+                const spd = size * 0.1 + 5;
+                const angle = Math.random() * Math.PI * 2;
+                return new Circle(
+                    stageWidth / 2,
+                    stageHeight / 2,
+                    Math.cos(angle) * spd,
+                    Math.sin(angle) * spd,
+                    size,
+                    (Math.random() * 0xffffff) & 0x333333
+                );
+            }
+        }
+        class ColorTransformFilter extends PIXI.filters.ColorMatrixFilter {
+            constructor(
+                redMultiplier = 1,
+                greenMultiplier = 1,
+                blueMultiplier = 1,
+                alphaMultiplier = 1,
+                redOffset = 0,
+                greenOffset = 0,
+                blueOffset = 0,
+                alphaOffset = 0
+            ) {
+                super();
+                this.matrix = [
+                    redMultiplier,
+                    0,
+                    0,
+                    0,
+                    redOffset / 255,
+                    0,
+                    greenMultiplier,
+                    0,
+                    0,
+                    greenOffset / 255,
+                    0,
+                    0,
+                    blueMultiplier,
+                    0,
+                    blueOffset / 255,
+                    0,
+                    0,
+                    0,
+                    alphaMultiplier,
+                    alphaOffset / 255,
+                ];
+            }
+        }
         let width = layoutState.width / 2;
         let height = layoutState.height / 2;
         const container = new PIXI.Container();
@@ -66,84 +148,3 @@ export default ({ className }: Props) => {
     }, arr0);
     return <canvas className={className} ref={canvas} width={width} height={height} />;
 };
-
-class Circle extends PIXI.Graphics {
-    constructor(
-        public x: number,
-        public y: number,
-        public dx: number,
-        public dy: number,
-        public size: number,
-        public color: number
-    ) {
-        super();
-        this.blendMode = PIXI.BLEND_MODES.ADD;
-        if (size > 0) {
-            this.beginFill(color);
-            this.drawCircle(0, 0, size);
-            this.endFill();
-        }
-    }
-    move(container: PIXI.Container, stageWidth: number, stageHeight: number) {
-        this.x += this.dx;
-        this.y += this.dy;
-        if (
-            this.x < -this.size ||
-            this.x > stageWidth + this.size ||
-            this.y < -this.size ||
-            this.y > stageHeight + this.size
-        ) {
-            container.removeChild(this);
-        }
-    }
-    static gen(stageWidth: number, stageHeight: number, pow: number) {
-        const size = pow * (Math.max(stageWidth, stageHeight) / 5);
-        const spd = size * 0.1 + 5;
-        const angle = Math.random() * Math.PI * 2;
-        return new Circle(
-            stageWidth / 2,
-            stageHeight / 2,
-            Math.cos(angle) * spd,
-            Math.sin(angle) * spd,
-            size,
-            (Math.random() * 0xffffff) & 0x333333
-        );
-    }
-}
-
-class ColorTransformFilter extends PIXI.filters.ColorMatrixFilter {
-    constructor(
-        redMultiplier = 1,
-        greenMultiplier = 1,
-        blueMultiplier = 1,
-        alphaMultiplier = 1,
-        redOffset = 0,
-        greenOffset = 0,
-        blueOffset = 0,
-        alphaOffset = 0
-    ) {
-        super();
-        this.matrix = [
-            redMultiplier,
-            0,
-            0,
-            0,
-            redOffset / 255,
-            0,
-            greenMultiplier,
-            0,
-            0,
-            greenOffset / 255,
-            0,
-            0,
-            blueMultiplier,
-            0,
-            blueOffset / 255,
-            0,
-            0,
-            0,
-            alphaMultiplier,
-            alphaOffset / 255,
-        ];
-    }
-}
