@@ -17,27 +17,54 @@ export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
 }
 
 export function useAnimationFrameLoop(
-    emitter: EventEmitter = new EventEmitter(),
+    emitter: EventEmitter,
     fps: number = 60,
-): EventEmitter {
-    const interval = 1000 / fps;
+) {
+    const [raf] = useState(new Raf(fps, () => emitter.emit('animation-frame')));
+    raf.fps = fps;
     useEffect(() => {
-        let unmounted = false;
-        let then = Date.now();
-        const loop = () => {
-            if (unmounted) return;
-            requestAnimationFrame(loop);
-            const now = Date.now();
-            const elapsed = now - then;
-            if (elapsed > interval) {
-                then = now - (elapsed % interval);
-                emitter.emit('animation-frame');
-            }
-        };
-        loop();
+        raf.loop = true;
         return () => {
-            unmounted = true;
+            raf.loop = false;
         };
     }, arr0);
-    return emitter;
+}
+
+class Raf {
+    constructor(fps: number, public hook: () => void) {
+        this.fps = fps;
+    }
+    private _loop: boolean = false;
+    private _rafId: number | null = null;
+    private _fps: number = 0;
+    private _interval: number = 0;
+    private _then: number = 0;
+    set loop(value: boolean) {
+        if (value && !this._loop) this.run();
+        if (!value && this._loop) this.end();
+        this._loop = value;
+    }
+    get loop() {
+        return this._loop;
+    }
+    set fps(value: number) {
+        this._fps = value;
+        this._interval = 1000 / value;
+    }
+    get fps() {
+        return this._fps;
+    }
+    private run = () => {
+        this._rafId = requestAnimationFrame(this.run);
+        const now = Date.now();
+        const elapsed = now - this._then;
+        if (elapsed > this._interval) {
+            this._then = now - (elapsed % this._interval);
+            this.hook();
+        }
+    };
+    private end() {
+        if (this._rafId) cancelAnimationFrame(this._rafId);
+        this._rafId = null;
+    };
 }
