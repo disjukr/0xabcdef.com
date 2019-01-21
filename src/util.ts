@@ -16,13 +16,23 @@ export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
     return [value, emitter];
 }
 
-export function useAnimationFrameLoop(emitter: EventEmitter = new EventEmitter()): EventEmitter {
+export function useAnimationFrameLoop(
+    emitter: EventEmitter = new EventEmitter(),
+    fps: number = 60,
+): EventEmitter {
+    const interval = 1000 / fps;
     useEffect(() => {
         let unmounted = false;
+        let then = Date.now();
         const loop = () => {
             if (unmounted) return;
-            emitter.emit('animation-frame');
             requestAnimationFrame(loop);
+            const now = Date.now();
+            const elapsed = now - then;
+            if (elapsed > interval) {
+                then = now - (elapsed % interval);
+                emitter.emit('animation-frame');
+            }
         };
         loop();
         return () => {

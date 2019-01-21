@@ -12,7 +12,7 @@ export default ({ className }: Props) => {
     const [layoutState, emitter] = useSubscribe(layoutContext);
     const width = layoutState.width / 2;
     const height = layoutState.height / 2;
-    useAnimationFrameLoop(emitter);
+    useAnimationFrameLoop(emitter, 50);
     useEffect(() => {
         // babel에서 typeof import 지원이 안되는 듯 하다...
         // 개발활때만 주석 풀고 작업해야함 ㅠㅠㅠ
