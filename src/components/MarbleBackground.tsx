@@ -14,10 +14,7 @@ export default ({ className }: Props) => {
     const height = layoutState.height / 2;
     useAnimationFrameLoop(emitter, 50);
     useEffect(() => {
-        // babel에서 typeof import 지원이 안되는 듯 하다...
-        // 개발활때만 주석 풀고 작업해야함 ㅠㅠㅠ
-        // const PIXI: typeof import('pixi.js') = require('pixi.js');
-        const PIXI = require('pixi.js');
+        const PIXI: typeof import('pixi.js') = require('pixi.js');
         class Circle extends PIXI.Graphics {
             constructor(
                 public x: number,
