@@ -1,4 +1,4 @@
-declare module '*.sass' {
+declare module '*.scss' {
     interface Styles {
         [key: string]: string;
     }

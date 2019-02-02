@@ -10,7 +10,7 @@ interface LayoutProps {
 }
 
 export default ({ children }: LayoutProps) => {
-    const [layoutState, setLayoutState] = useState(getLayoutState);
+    const [layoutState, setLayoutState] = useState(getLayoutState());
     useEffect(() => {
         const onresize = () => setLayoutState(getLayoutState());
         window.addEventListener('resize', onresize);
