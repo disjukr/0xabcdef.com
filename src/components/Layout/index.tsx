@@ -1,9 +1,11 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { joinProvider } from 'join-react-context';
+import { Transition, TransitionGroup } from 'react-transition-group';
 
 import { arr0 } from '../../util';
 import './index.module.scss';
+import { TransitionStatus } from 'react-transition-group/Transition';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -22,7 +24,15 @@ export default ({ children }: LayoutProps) => {
             <Helmet>
                 <title>JongChan Choi</title>
             </Helmet>
-            {children}
+            <TransitionGroup component={null}>
+                <Transition key={location.pathname} timeout={300}>
+                    {state => (
+                        <pageTransitionStateContext.Provider value={state}>
+                            {children}
+                        </pageTransitionStateContext.Provider>
+                    )}
+                </Transition>
+            </TransitionGroup>
         </Provider>
     );
 };
@@ -41,5 +51,7 @@ const getLayoutState = () =>
           };
 
 export const layoutContext = createContext(initialLayoutState);
+
+export const pageTransitionStateContext = createContext<TransitionStatus>('entered');
 
 const Provider = joinProvider([layoutContext]);

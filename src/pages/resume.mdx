@@ -1,3 +1,8 @@
+import { useContext } from 'react';
+import classNames from 'classnames';
+import Link from 'gatsby-link';
+
+import { pageTransitionStateContext } from '../components/Layout';
 import * as styles from './resume.module.scss';
 
 JongChan Choi
@@ -7,7 +12,7 @@ JongChan Choi
 
 - e-mail: [jong@chan.moe](mailto:jong@chan.moe)
 
-- website: [0xABCDEF.com](http://0xabcdef.com/)
+- website: <Link to='/'>0xABCDEF.com</Link>
 
 
 TL;DR
@@ -251,7 +256,8 @@ Open Source
 </details>
 
 export default ({ children }) => {
-    return <div className={styles.resume}>
+    const pageTransitionState = useContext(pageTransitionStateContext);
+    return <div className={classNames(styles.resume, styles[pageTransitionState])}>
         {children}
     </div>;
 };

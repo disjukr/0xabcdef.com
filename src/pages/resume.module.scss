@@ -1,20 +1,28 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,600);
 .resume {
     margin: 0 auto;
-    width: 500pt;
-    outline: 1px solid black;
     padding: 100pt 30pt;
+    width: 500pt;
+    color: #fff;
+    background-color: rgba(#abcdef, 0.3);
     summary {
         transition: background 0.3s;
     }
     summary:hover {
         background-color: rgba(233, 242, 255, 0.5);
     }
-    h1, h2, h3, h4, h5, h6, summary {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    summary {
         font-family: 'Source Sans Pro', sans-serif;
         font-weight: 200;
     }
-    h1 { font-size: 25pt; }
+    h1 {
+        font-size: 25pt;
+    }
     h2 {
         margin-top: 50pt;
         padding-left: 3pt;
@@ -24,17 +32,20 @@
         padding-left: 6pt;
         font-size: 17pt;
     }
-    h4, summary {
+    h4,
+    summary {
         padding-left: 9pt;
         margin-top: 15pt;
         margin-bottom: 10pt;
         font-size: 14pt;
     }
-    h5, h6 {
+    h5,
+    h6 {
         padding-left: 12pt;
         font-size: 12pt;
     }
-    p, li {
+    p,
+    li {
         margin: 5pt 0;
         font-weight: 400;
         font-family: 'Source Sans Pro', sans-serif;
@@ -43,21 +54,41 @@
     p {
         padding-left: 15pt;
     }
-    
-    ul, ol { padding-left: 15pt; }
-    ul>li, ol>li { list-style: none; }
-    ul>li>p:first-child::before, ol>li>p:first-child::before {
+
+    ul,
+    ol {
+        padding-left: 15pt;
+    }
+    ul > li,
+    ol > li {
+        list-style: none;
+    }
+    ul > li > p:first-child::before,
+    ol > li > p:first-child::before {
         text-align: right;
         font-size: 10pt;
     }
-    ul>li>p:not(:first-child)::before, ol>li>p:not(:first-child)::before { content: '\00a0\00a0'; }
-    ul>li>p:first-child::before { content: '- '; }
-    ol { counter-reset: item; }
-    ol>li { counter-increment: item; }
-    ol>li>p:first-child::before { content: counter(item) '. '; }
-    
-    ol>li[value]>p:first-child::before { content: attr(value) '. '; }
-    
+    ul > li > p:not(:first-child)::before,
+    ol > li > p:not(:first-child)::before {
+        content: '\00a0\00a0';
+    }
+    ul > li > p:first-child::before {
+        content: '- ';
+    }
+    ol {
+        counter-reset: item;
+    }
+    ol > li {
+        counter-increment: item;
+    }
+    ol > li > p:first-child::before {
+        content: counter(item) '. ';
+    }
+
+    ol > li[value] > p:first-child::before {
+        content: attr(value) '. ';
+    }
+
     code {
         display: inline;
         padding: 0 2pt;
@@ -66,7 +97,7 @@
         color: #314592;
         background-color: #e6f0ff;
     }
-    
+
     code.tag {
         padding: 2pt 5pt;
         font-size: 10pt;
@@ -74,14 +105,35 @@
         background-color: #2d7aa7;
         border-radius: 3pt;
     }
-    
+
     a {
         font-weight: 600;
         text-decoration: none;
         transition: color ease 0.3s;
     }
-    a:link { color: #4cadde; }
-    a:link:hover { filter: hue-rotate(-30deg); }
-    a:visited { color: #678fce; }
-    a:hover { text-decoration: underline; }
+    a:link {
+        color: #4cadde;
+    }
+    a:link:hover {
+        filter: hue-rotate(-30deg);
+    }
+    a:visited {
+        color: #678fce;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
+.resume {
+    position: relative;
+    transition: opacity 0.3s;
+    &.exiting,
+    &.exited {
+        opacity: 0;
+    }
+    &.entering,
+    &.entered {
+        opacity: 1;
+    }
 }
