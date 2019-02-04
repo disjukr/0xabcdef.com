@@ -112,8 +112,11 @@ export default ({ className }: Props) => {
         const df = new PIXI.filters.DisplacementFilter(rts2);
         const f = 0.9;
         const cf = new ColorTransformFilter(f, f, f);
+        const cf2 = new PIXI.filters.ColorMatrixFilter();
+        cf2.contrast(0.3);
         rts1.filters = [df, cf];
-        container.addChild(circles, rts1);
+        container.addChild(rts1);
+        container.filters = [cf2];
         let a = 0;
         const renderer = PIXI.autoDetectRenderer(width, height, {
             view: canvas.current,
@@ -138,7 +141,7 @@ export default ({ className }: Props) => {
             df.scale.y = Math.sin(a) * pow * s;
             renderer.render(rts1, rt1, false, cameraMatrix);
             renderer.render(circles, rt1, false);
-            renderer.render(container, rt2, false, cameraMatrix);
+            renderer.render(rts1, rt2, false, cameraMatrix);
             renderer.render(container);
         });
         return () => emitter.removeAllListeners();
