@@ -4,7 +4,7 @@
     "author": "JongChan Choi <jong@chan.moe>",
     "license": "UNLICENSED",
     "scripts": {
-        "gatsby": "sucrase-node ./node_modules/gatsby/dist/bin/gatsby.js",
+        "gatsby": "cross-env GATSBY_GRAPHQL_IDE=playground sucrase-node ./node_modules/gatsby/dist/bin/gatsby.js",
         "prettier": "prettier --write \"*.@(ts|json)\" \"@(src|types)/**/*.ts?(x)\"",
         "gh-pages": "gh-pages -d public -b master",
         "deploy": "run-s build gh-pages",
@@ -20,6 +20,7 @@
         "@types/pixi.js": "^4.8.6",
         "@types/react-helmet": "^5.0.8",
         "classnames": "^2.2.6",
+        "cross-env": "^5.2.0",
         "gatsby": "^2.0.111",
         "gatsby-mdx": "^0.3.5",
         "gatsby-plugin-layout": "^1.0.12",
