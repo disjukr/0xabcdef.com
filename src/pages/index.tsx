@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Link from 'gatsby-link';
 
 import MarbleBackground from '../components/MarbleBackground';
 import * as styles from './index.module.scss';
@@ -12,7 +13,7 @@ export default () => {
                 <h1>JongChan Choi</h1>
                 <ul>
                     <li>
-                        <a href="https://0xabcdef.com/resume/">resume</a>
+                        <Link to='/resume'>resume</Link>
                     </li>
                     <li>
                         <a href="https://github.com/disjukr">github</a>

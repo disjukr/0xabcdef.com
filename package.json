@@ -10,7 +10,8 @@
         "deploy": "run-s build gh-pages",
         "build": "npm run gatsby -- build",
         "dev": "run-p dev:**",
-        "dev:gatsby": "npm run gatsby -- develop"
+        "dev:gatsby": "npm run gatsby -- develop",
+        "dev:prettier": "onchange \"@(*.ts|@(src|types)/**/*.@(ts|tsx|scss))\" -- prettier --write {{changed}}"
     },
     "dependencies": {
         "@mdx-js/mdx": "^0.16.8",
@@ -30,6 +31,7 @@
         "join-react-context": "0.0.3",
         "node-sass": "^4.11.0",
         "npm-run-all": "^4.1.5",
+        "onchange": "^5.2.0",
         "pixi.js": "^4.8.5",
         "prettier": "^1.16.3",
         "react": "^16.8.0-alpha.0",
