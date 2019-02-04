@@ -9,9 +9,10 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 
 interface LayoutProps {
     children: React.ReactNode;
+    location: Location;
 }
 
-export default ({ children }: LayoutProps) => {
+export default ({ location, children }: LayoutProps) => {
     const [layoutState, setLayoutState] = useState(getLayoutState());
     useEffect(() => {
         const onresize = () => setLayoutState(getLayoutState());
