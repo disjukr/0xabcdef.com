@@ -11,7 +11,7 @@ interface SkillSetProps {
 const SkillSet: React.FC<SkillSetProps> = ({ className, items }) => {
     return (
         <p className={classNames(styles.skillSet, className)}>
-            {interleave(items.map(item => <code>{item}</code>), ' ')}
+            {interleave(items.map((item, index) => <code key={index}>{item}</code>), ' ')}
         </p>
     );
 };

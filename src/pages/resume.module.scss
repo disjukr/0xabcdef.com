@@ -1,9 +1,19 @@
-.resume {
+.resume > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0 auto;
-    padding: 100pt 30pt;
-    width: 500pt;
+    padding: 50px 30px;
+    max-width: 1000px;
     color: #fff;
     background-color: rgba(#abcdef, 0.3);
+    .col1 {
+        flex: 1 0 100%;
+    }
+    .col2 {
+        flex: 1 0 50%;
+        min-width: 400px;
+    }
     summary {
         transition: background 0.3s;
     }
@@ -19,12 +29,12 @@
     summary {
         font-family: 'Source Sans Pro', sans-serif;
         font-weight: 200;
+        outline: none;
     }
     h1 {
         font-size: 25pt;
     }
     h2 {
-        margin-top: 50pt;
         padding-left: 3pt;
         font-size: 20pt;
     }

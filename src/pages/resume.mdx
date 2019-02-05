@@ -6,6 +6,8 @@ import { pageTransitionStateContext } from '../components/Layout';
 import SkillSet from '../components/resume/SkillSet';
 import * as styles from './resume.module.scss';
 
+<div class={styles.col2}>
+
 JongChan Choi
 ===
 
@@ -15,12 +17,16 @@ JongChan Choi
 
 - website: <Link to='/'>0xABCDEF.com</Link>
 
+</div>
+<div class={styles.col2}>
 
 TL;DR
 ---
 I'm quite experienced javascript programmer.<br/>
-love graphics and programming language.
+loves web, graphics and programming language.
 
+</div>
+<div class={styles.col2}>
 
 Education
 ---
@@ -31,12 +37,20 @@ Education
 
 3. [NHN NEXT](http://www.nhnnext.org/) 2013~2014
 
+</div>
+<div class={styles.col2}></div>
+<div class={styles.col1}>
 
 Employment
 ---
+
+</div>
+<div class={styles.col2}>
+
 ### [Synapsoft](http://synapsoft.co.kr/) 2014-06 ~ 2016-06
 participated synap editor and naver office project.<br/>
-mainly implemented word document layouter and renderer from scratch.<br/>
+mainly implemented word document layouter<br/>
+and renderer from scratch.<br/>
 maintained word document editor.
 
 <SkillSet items={[
@@ -58,6 +72,10 @@ maintained word document editor.
     'svg',
     'css',
 ]}/>
+
+</div>
+<div class={styles.col2}></div>
+<div class={styles.col2}>
 
 ### [Spoqa](http://www.spoqa.com/) 2016-06 ~ 2018-01
 
@@ -90,6 +108,9 @@ maintained word document editor.
     'scss',
 ]}/>
 
+</div>
+<div class={styles.col2}></div>
+<div class={styles.col2}>
 
 ### [Devsisters](http://www.devsisters.com/) 2018-03 ~ current
 ₍₍(ง˘ω˘)ว⁾⁾
@@ -99,6 +120,9 @@ maintained word document editor.
     'typescript',
     'webpack',
 ]}/>
+
+</div>
+<div class={styles.col1}>
 
 Prize and Awards
 ---
@@ -255,6 +279,8 @@ Open Source
     [node v8.1.0 release note](https://nodejs.org/en/blog/release/v8.1.0/)
 
 </details>
+
+</div>
 
 export default ({ children }) => {
     const pageTransitionState = useContext(pageTransitionStateContext);
