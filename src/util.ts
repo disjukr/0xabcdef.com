@@ -16,10 +16,7 @@ export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
     return [value, emitter];
 }
 
-export function useAnimationFrameLoop(
-    emitter: EventEmitter,
-    fps: number = 60,
-) {
+export function useAnimationFrameLoop(emitter: EventEmitter, fps: number = 60) {
     const [raf] = useState(new Raf(fps, () => emitter.emit('animation-frame')));
     raf.fps = fps;
     useEffect(() => {
@@ -66,5 +63,12 @@ class Raf {
     private end() {
         if (this._rafId) cancelAnimationFrame(this._rafId);
         this._rafId = null;
-    };
+    }
+}
+
+export function interleave<T, U>(arr: T[], gap: U): (T | U)[] {
+    const result: (T | U)[] = [];
+    for (const item of arr) result.push(item, gap);
+    result.pop();
+    return result;
 }
