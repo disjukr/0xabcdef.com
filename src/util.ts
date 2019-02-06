@@ -1,9 +1,38 @@
 import { EventEmitter } from 'events';
-import { Context, useState, useEffect, useContext } from 'react';
+import { Context, useState, useEffect, useContext, RefObject, useMemo } from 'react';
 
 export const arr0 = [];
 export const obj0 = {};
 export const noop = () => {};
+
+export interface Size {
+    width: number;
+    height: number;
+}
+export function useSize(ref: RefObject<HTMLElement>) {
+    const windowSize = useWindowSize();
+    const [size, setSize] = useState<Size | null>(null);
+    useEffect(() => {
+        if (!ref.current) return;
+        const { width, height } = ref.current.getBoundingClientRect();
+        setSize({ width, height });
+    }, [ref, windowSize.width, windowSize.height]);
+    return size;
+}
+
+const zeroSize = { width: 0, height: 0 };
+export function useWindowSize() {
+    const [windowSize, setWindowSize] = useState<Size>(zeroSize);
+    useEffect(() => {
+        const onResize = () => {
+            setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+        };
+        onResize();
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
+    return windowSize;
+}
 
 export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
     const [emitter] = useState(() => new EventEmitter());
@@ -16,15 +45,24 @@ export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
     return [value, emitter];
 }
 
-export function useAnimationFrameLoop(emitter: EventEmitter, fps: number = 60) {
-    const [raf] = useState(new Raf(fps, () => emitter.emit('animation-frame')));
-    raf.fps = fps;
+export function useRaf(hook: () => void, fps: number = 60) {
+    const [raf] = useState(() => new Raf(fps, hook));
+    useEffect(() => {
+        raf.fps = fps;
+        raf.hook = hook;
+    }, [hook, fps]);
     useEffect(() => {
         raf.loop = true;
         return () => {
             raf.loop = false;
         };
     }, arr0);
+}
+
+// TODO: 걷어내자. MarbleBackground가 의존중
+export function useAnimationFrameLoop(emitter: EventEmitter, fps: number = 60) {
+    const updater = useMemo(() => () => emitter.emit('animation-frame'), [emitter]);
+    useRaf(updater, fps);
 }
 
 class Raf {
