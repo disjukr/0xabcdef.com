@@ -25,8 +25,8 @@ const Panorama: React.FC<Props> = ({ className }) => {
         () => (_: any, now: number) => {
             if (!world) return;
             const t = now / 1000;
-            world.mesh.rotation.y = (Math.cos(t) / 2) - (Math.PI / 2);
-            world.mesh.rotation.x = (Math.sin(t) / 2) - (Math.PI / 8);
+            world.mesh.rotation.y = Math.cos(t) / 2 - Math.PI / 2;
+            world.mesh.rotation.x = Math.sin(t) / 2 - Math.PI / 8;
             world.renderer.render(world.scene, world.camera);
         },
         [world]
@@ -34,7 +34,7 @@ const Panorama: React.FC<Props> = ({ className }) => {
     useRaf(animate);
     return (
         <div className={classNames(styles.panorama, className)} ref={container}>
-            <canvas ref={canvas} width={0} height={0}/>
+            <canvas ref={canvas} width={0} height={0} />
         </div>
     );
 };
@@ -54,7 +54,9 @@ class World {
         const geometry = new THREE.SphereGeometry(50, 60, 40);
         geometry.scale(-1, 1, 1);
         const material = new THREE.MeshBasicMaterial({
-            map: new THREE.TextureLoader().load(require('../../../images/PANO_20140116_155642.jpg')),
+            map: new THREE.TextureLoader().load(
+                require('../../../images/PANO_20140116_155642.jpg')
+            ),
         });
         this.mesh = new THREE.Mesh(geometry, material);
         this.scene.add(this.mesh);

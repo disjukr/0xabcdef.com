@@ -1,5 +1,4 @@
-import { EventEmitter } from 'events';
-import { Context, useState, useEffect, useContext, RefObject, useMemo, useRef } from 'react';
+import { useState, useEffect, RefObject } from 'react';
 
 export const arr0 = [];
 export const obj0 = {};
@@ -34,17 +33,6 @@ export function useWindowSize() {
     return windowSize;
 }
 
-export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
-    const [emitter] = useState(() => new EventEmitter());
-    const value = useContext(context);
-    const cached = useRef(value);
-    if (value !== cached.current) {
-        emitter.emit('update', value);
-        cached.current = value;
-    }
-    return [value, emitter];
-}
-
 export function useRaf(hook: (elapsed: number, now: number) => void, fps: number = 60) {
     const [raf] = useState(() => new Raf(fps, hook));
     useEffect(() => {
@@ -57,12 +45,6 @@ export function useRaf(hook: (elapsed: number, now: number) => void, fps: number
             raf.loop = false;
         };
     }, arr0);
-}
-
-// TODO: 걷어내자. MarbleBackground가 의존중
-export function useAnimationFrameLoop(emitter: EventEmitter, fps: number = 60) {
-    const updater = useMemo(() => () => emitter.emit('animation-frame'), [emitter]);
-    useRaf(updater, fps);
 }
 
 class Raf {
