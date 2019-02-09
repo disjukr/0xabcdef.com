@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import classNames from 'classnames';
 import * as THREE from 'three';
 
@@ -22,10 +22,11 @@ const Panorama: React.FC<Props> = ({ className }) => {
         world.camera.updateProjectionMatrix();
     }, [size, world]);
     const animate = useMemo(
-        () => () => {
+        () => (_: any, now: number) => {
             if (!world) return;
-            world.mesh.rotation.x += 0.01;
-            world.mesh.rotation.y += 0.02;
+            const t = now / 1000;
+            world.mesh.rotation.y = (Math.cos(t) / 2) - (Math.PI / 2);
+            world.mesh.rotation.x = (Math.sin(t) / 2) - (Math.PI / 8);
             world.renderer.render(world.scene, world.camera);
         },
         [world]
@@ -33,7 +34,7 @@ const Panorama: React.FC<Props> = ({ className }) => {
     useRaf(animate);
     return (
         <div className={classNames(styles.panorama, className)} ref={container}>
-            <canvas ref={canvas} width={0} height={0} />
+            <canvas ref={canvas} width={0} height={0}/>
         </div>
     );
 };
@@ -46,13 +47,15 @@ class World {
     mesh: THREE.Mesh;
     renderer: THREE.WebGLRenderer;
     constructor(public size: { width: number; height: number }, public canvas: HTMLCanvasElement) {
-        // TODO: implement panorama
         const ratio = size.width / size.height;
-        this.camera = new THREE.PerspectiveCamera(70, ratio, 0.01, 10);
+        this.camera = new THREE.PerspectiveCamera(30, ratio, 0.1, 100);
         this.camera.position.z = 1;
         this.scene = new THREE.Scene();
-        const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-        const material = new THREE.MeshNormalMaterial();
+        const geometry = new THREE.SphereGeometry(50, 60, 40);
+        geometry.scale(-1, 1, 1);
+        const material = new THREE.MeshBasicMaterial({
+            map: new THREE.TextureLoader().load(require('../../../images/PANO_20140116_155642.jpg')),
+        });
         this.mesh = new THREE.Mesh(geometry, material);
         this.scene.add(this.mesh);
         this.renderer = new THREE.WebGLRenderer({ canvas });

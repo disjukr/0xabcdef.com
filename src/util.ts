@@ -45,7 +45,7 @@ export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
     return [value, emitter];
 }
 
-export function useRaf(hook: () => void, fps: number = 60) {
+export function useRaf(hook: (elapsed: number, now: number) => void, fps: number = 60) {
     const [raf] = useState(() => new Raf(fps, hook));
     useEffect(() => {
         raf.fps = fps;
@@ -66,7 +66,7 @@ export function useAnimationFrameLoop(emitter: EventEmitter, fps: number = 60) {
 }
 
 class Raf {
-    constructor(fps: number, public hook: () => void) {
+    constructor(fps: number, public hook: (elapsed: number, now: number) => void) {
         this.fps = fps;
     }
     private _loop: boolean = false;
@@ -95,7 +95,7 @@ class Raf {
         const elapsed = now - this._then;
         if (elapsed > this._interval) {
             this._then = now - (elapsed % this._interval);
-            this.hook();
+            this.hook(elapsed, now);
         }
     };
     private end() {
