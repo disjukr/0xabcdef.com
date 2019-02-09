@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { Context, useState, useEffect, useContext, RefObject, useMemo } from 'react';
+import { Context, useState, useEffect, useContext, RefObject, useMemo, useRef } from 'react';
 
 export const arr0 = [];
 export const obj0 = {};
@@ -37,10 +37,10 @@ export function useWindowSize() {
 export function useSubscribe<T>(context: Context<T>): [T, EventEmitter] {
     const [emitter] = useState(() => new EventEmitter());
     const value = useContext(context);
-    const [cachedValue, updateCache] = useState(value);
-    if (value !== cachedValue) {
+    const cached = useRef(value);
+    if (value !== cached.current) {
         emitter.emit('update', value);
-        updateCache(value);
+        cached.current = value;
     }
     return [value, emitter];
 }
