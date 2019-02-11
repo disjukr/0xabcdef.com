@@ -7,9 +7,11 @@ import * as styles from './index.module.scss';
 
 interface Props {
     className?: string;
+    image: string;
+    patrol: (now: number) => Rotation;
 }
 
-const Panorama: React.FC<Props> = ({ className }) => {
+const Panorama: React.FC<Props> = ({ className, image }) => {
     const container = useRef<HTMLDivElement>(null);
     const canvas = useRef<HTMLCanvasElement>(null);
     const size = useSize(container);
@@ -21,6 +23,13 @@ const Panorama: React.FC<Props> = ({ className }) => {
         world.camera.aspect = size.width / size.height;
         world.camera.updateProjectionMatrix();
     }, [size, world]);
+    useEffect(() => {
+        if (!world) return;
+        const material = world!.mesh.material as THREE.MeshBasicMaterial;
+        material.setValues({ map: new THREE.TextureLoader().load(
+            require('../../../images/' + image)
+        ) });
+    }, [image, world]);
     const animate = useMemo(
         () => (_: any, now: number) => {
             if (!world) return;
@@ -63,4 +72,9 @@ class World {
         this.renderer = new THREE.WebGLRenderer({ canvas });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
+}
+
+interface Rotation {
+    x: number;
+    y: number;
 }
