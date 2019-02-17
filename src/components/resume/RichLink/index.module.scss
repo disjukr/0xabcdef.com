@@ -1,0 +1,41 @@
+.richLink.richLink.richLink {
+    display: block;
+    max-width: 100%;
+    &:hover {
+        filter: none;
+    }
+    > article {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -10px;
+        > * {
+            margin: 10px;
+        }
+        > :first-child {
+            flex: 1 0 300px;
+            max-width: 100%;
+            > img {
+                width: 100%;
+            }
+        }
+        > :last-child {
+            flex: 1 0 500px;
+            max-width: 100%;
+            h1 {
+                margin: 0;
+                margin-top: -10px;
+                margin-bottom: 10px;
+                font-size: 1.7em;
+                word-break: keep-all;
+            }
+            blockquote {
+                margin: 0;
+                padding: 0;
+                padding-left: 10px;
+                font-weight: normal;
+                opacity: 0.7;
+                border-left: 3px solid currentColor;
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@ import { pageTransitionStateContext } from '../components/Layout';
 import { DocState, docStateContext } from '../components/resume/doc-state';
 import SkillSet from '../components/resume/SkillSet';
 import Panorama from '../components/resume/Panorama';
+import RichLink from '../components/resume/RichLink';
 import * as styles from './resume.module.scss';
 
 <div class={styles.col2}>
@@ -187,19 +188,41 @@ maintained word document editor.
 Prize and Awards
 ---
 ### [D2 Fest 2013](http://d2fest.kr/2013/prize-winners.html)
-2013-09-28
 
-encouragement prize
+2013-09-28 - encouragement prize
+
+<RichLink
+    title='NHN NEXT 최종찬 학생, D2 FEST 대학생 부문 장려상 수상'
+    quote={`
+        지난 90일동안 D2 FEST 참가자들은 개발자의 입장이 되어 끊임없는 고민과 작업 끝에
+        오픈소스를 이용한 멋진 개발도구, 서비스들을 만들었습니다.
+        그 중, NEXT 최종찬 학생이 만든 작품은 <croquis.js> 라는 오픈소스 라이브러리인데요.
+        웹 드로잉 도구를 구현하기 쉽게 만들어주는 라이브러리입니다.
+    `}
+    image={require('../images/prize-and-awards/d22013.jpg')}
+    href='https://blog.naver.com/nhnnext/20198423202'
+/>
 
 ### [MS Imagine Cup 2015 Korea Finals](https://imagine.microsoft.com/en-us/Team/Index/aea4c4ac-5f45-46f5-b25d-1219775e9ab1)
-2015-03-13
 
-[won at the innovation category](http://www.msn.com/ko-kr/news/techandscience/ms-%ED%95%99%EC%83%9D-%ED%85%8C%ED%81%AC%EB%86%80%EB%A1%9C%EC%A7%80-%EA%B2%BD%EC%A7%84%EB%8C%80%ED%9A%8C-%EC%9D%B4%EB%A7%A4%EC%A7%84%EC%BB%B5-%ED%95%9C%EA%B5%AD%EB%8C%80%ED%91%9C-%EC%84%A0%EB%B0%9C/ar-AA9IuTw)
+2015-03-13 - won at the innovation category
+
+<RichLink
+    title="MS 학생 테크놀로지 경진대회 '이매진컵' 한국대표 선발"
+    quote={`
+        한국마이크로소프트와 중앙대학교가 공동주최한 '2015 이매진컵' 한국대표 선발전이
+        13일 중앙대학교 서울캠퍼스 아트센터 대극장에서 개최됐다.
+        이노베이션 부문에서는 학생용 교육 소프트웨어 '상자'를 만든 '상상' 팀이
+        관심사를 공유하는 사람들과 관련된 영상을 모아주는 서비스 '다뷰'를 만든 '멀티플'을 제치고 1위를 차지했다.
+    `}
+    image={require('../images/prize-and-awards/imagine-cup.jpg')}
+    href='https://www.msn.com/ko-kr/news/techandscience/ms-%ED%95%99%EC%83%9D-%ED%85%8C%ED%81%AC%EB%86%80%EB%A1%9C%EC%A7%80-%EA%B2%BD%EC%A7%84%EB%8C%80%ED%9A%8C-%EC%9D%B4%EB%A7%A4%EC%A7%84%EC%BB%B5-%ED%95%9C%EA%B5%AD%EB%8C%80%ED%91%9C-%EC%84%A0%EB%B0%9C/ar-AA9IuTw'
+/>
+
 
 ### [D2 Fest 2015](http://d2campusfest.kr/2015/)
-2016-03-19
 
-[encouragement prize](https://github.com/D2CAMPUS-FEST/2015#yaksokjs--장려상)
+2016-03-19 - [encouragement prize](https://github.com/D2CAMPUS-FEST/2015#yaksokjs--장려상)
 
 
 Open Source
