@@ -4,11 +4,12 @@
     "author": "JongChan Choi <jong@chan.moe>",
     "license": "UNLICENSED",
     "scripts": {
+        "clear": "rimraf .cache public",
         "gatsby": "cross-env GATSBY_GRAPHQL_IDE=playground sucrase-node ./node_modules/gatsby/dist/bin/gatsby.js",
         "prettier": "prettier --write \"*.@(ts|json)\" \"@(src|types)/**/*.ts?(x)\"",
         "gh-pages": "gh-pages -d public -b master",
         "deploy": "run-s build gh-pages",
-        "build": "npm run gatsby -- build",
+        "build": "npm run clear && npm run gatsby -- build",
         "dev": "run-p dev:**",
         "dev:gatsby": "npm run gatsby -- develop",
         "dev:prettier": "onchange \"@(*.ts|@(src|types)/**/*.@(ts|tsx|scss))\" -- prettier --write {{changed}}"
@@ -41,6 +42,7 @@
         "react-dom": "^16.8.1",
         "react-helmet": "^6.0.0-beta",
         "react-transition-group": "^2.5.3",
+        "rimraf": "^2.6.3",
         "sucrase": "^3.9.5",
         "three": "^0.101.1"
     }

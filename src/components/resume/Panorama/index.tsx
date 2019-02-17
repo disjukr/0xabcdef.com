@@ -26,9 +26,9 @@ const Panorama: React.FC<Props> = ({ className, image }) => {
     useEffect(() => {
         if (!world) return;
         const material = world!.mesh.material as THREE.MeshBasicMaterial;
-        material.setValues({ map: new THREE.TextureLoader().load(
-            require('../../../images/' + image)
-        ) });
+        material.setValues({
+            map: new THREE.TextureLoader().load(require('../../../images/' + image)),
+        });
     }, [image, world]);
     const animate = useMemo(
         () => (_: any, now: number) => {

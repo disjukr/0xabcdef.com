@@ -1,13 +1,16 @@
 const fakePixi = {
     autoDetectRenderer() {},
-    Matrix() {},
+    Matrix: class {},
     RenderTexture: class {
         static create() {}
     },
-    Graphics() {},
-    Container() {},
-    Sprite() {},
-    filters: { ColorMatrixFilter() {} },
+    Graphics: class {},
+    Container: class {},
+    Sprite: class {},
+    filters: {
+        ColorMatrixFilter: class {},
+        DisplacementFilter: class {},
+    },
 };
 
 export default (typeof window !== 'undefined'
