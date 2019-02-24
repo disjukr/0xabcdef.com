@@ -10,3 +10,12 @@
         border-radius: 3pt;
     }
 }
+
+@media print {
+    .skillSet.skillSet {
+        code {
+            color: #314592;
+            background-color: #e6f0ff;
+        }
+    }
+}

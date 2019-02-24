@@ -39,3 +39,15 @@
         }
     }
 }
+
+@media print {
+    .richLink.richLink.richLink {
+        > article {
+            > :first-child {
+                > img {
+                    display: none;
+                }
+            }
+        }
+    }
+}

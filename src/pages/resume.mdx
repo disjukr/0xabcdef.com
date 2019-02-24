@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import classNames from 'classnames';
 import Link from 'gatsby-link';
 
@@ -373,6 +373,13 @@ Open Source
 
 export default ({ children }) => {
     const pageTransitionState = useContext(pageTransitionStateContext);
+    useEffect(() => {
+        window.openEveryDetails = () => {
+            for (const details of document.querySelectorAll('details')) {
+                details.setAttribute('open', true);
+            }
+        };
+    }, []);
     return <div className={classNames(styles.resume, styles[pageTransitionState])}>
         {children}
     </div>;

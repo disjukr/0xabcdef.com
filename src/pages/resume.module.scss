@@ -139,3 +139,18 @@
         opacity: 1;
     }
 }
+
+@media print {
+    body {
+        background: white;
+    }
+    .resume > div {
+        padding: 0 30px;
+        color: #000;
+        background-color: transparent;
+        a:link,
+        a:visited {
+            color: #678fce;
+        }
+    }
+}
