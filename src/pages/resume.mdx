@@ -379,6 +379,6 @@ export default ({ children }) => {
         };
     }, []);
     return <div className={classNames(styles.resume, styles[pageTransitionState])}>
-        {children}
+        <div>{children}</div>
     </div>;
 };

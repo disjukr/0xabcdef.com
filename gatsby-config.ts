@@ -3,7 +3,14 @@ export = {
         'gatsby-plugin-react-helmet',
         'gatsby-plugin-sass',
         'gatsby-plugin-typescript',
-        'gatsby-mdx',
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                name: 'pages',
+                path: `${__dirname}/src/pages/`,
+            },
+        },
+        'gatsby-plugin-mdx',
         {
             resolve: 'gatsby-plugin-layout',
             options: {
