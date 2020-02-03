@@ -5,14 +5,14 @@
     "license": "UNLICENSED",
     "scripts": {
         "clear": "rimraf .cache public",
-        "gatsby": "cross-env GATSBY_GRAPHQL_IDE=playground sucrase-node ./node_modules/gatsby/dist/bin/gatsby.js",
+        "gatsby": "cross-env GATSBY_GRAPHQL_IDE=playground gatsby",
         "prettier": "prettier --write \"*.@(ts|json)\" \"@(src|types)/**/*.ts?(x)\"",
         "gh-pages": "gh-pages -d public -b master",
         "deploy": "run-s build gh-pages",
-        "build": "npm run clear && npm run gatsby -- build",
+        "build": "yarn clear && yarn gatsby build",
         "dev": "run-p dev:**",
-        "dev:gatsby": "npm run gatsby -- develop",
-        "dev:prettier": "onchange \"@(*.ts|@(src|types)/**/*.@(ts|tsx|scss))\" -- prettier --write {{changed}}"
+        "dev:gatsby": "yarn gatsby develop",
+        "dev:prettier": "onchange \"@(*.ts|@(src|types)/**/*.@(ts|tsx|scss))\" -- prettier --write \"{{changed}}\""
     },
     "dependencies": {
         "@mdx-js/mdx": "^1.5.5",
@@ -25,6 +25,7 @@
         "classnames": "^2.2.6",
         "cross-env": "^5.2.0",
         "gatsby": "^2.0.118",
+        "gatsby-link": "^2.2.29",
         "gatsby-plugin-layout": "^1.0.12",
         "gatsby-plugin-manifest": "^2.0.17",
         "gatsby-plugin-mdx": "^1.0.70",
