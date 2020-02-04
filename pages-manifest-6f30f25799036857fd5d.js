@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{172:function(e){e.exports={pages:[{componentChunkName:"component---src-pages-index-tsx",jsonName:"index",path:"/"},{componentChunkName:"component---src-pages-resume-mdx",jsonName:"resume-e4f",path:"/resume/"}],dataPaths:{index:"173/path---index-6a9-NZuapzHg3X9TaN1iIixfv1W23E","resume-e4f":"421/path---resume-e-4-f-cdf-YV2xtnt8tPyAY05Un6wm26zkpgI"}}}}]);
-//# sourceMappingURL=pages-manifest-6f30f25799036857fd5d.js.map
