@@ -46,6 +46,6 @@
         "react-transition-group": "^2.5.3",
         "rimraf": "^2.6.3",
         "sucrase": "^3.9.5",
-        "three": "^0.101.1"
+        "three": "^0.125.0"
     }
 }
